@@ -1,0 +1,1184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    color: #1a1a2e;
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+}
+
+body.dark {
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%);
+    color: #e0e0e0;
+}
+
+/* ============= LIVE DOCTOR CONSULTATION ============= */
+#live-consultation {
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240, 147, 251, 0.08) 100%);
+}
+
+.consultation-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.option-card {
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    border-color: #667eea;
+}
+
+.option-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #667eea;
+}
+
+.option-card.video-option i {
+    color: #2196F3;
+}
+
+.option-card.audio-option i {
+    color: #4CAF50;
+}
+
+.option-card h3 {
+    color: #333;
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.4rem;
+}
+
+.option-card p {
+    color: #666;
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+.option-card .time {
+    color: #999;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.doctors-list-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.doctor-list-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.doctor-list-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+    border-color: #667eea;
+}
+
+.doctor-info {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.doctor-avatar-circle {
+    font-size: 3.5rem;
+    min-width: 80px;
+    text-align: center;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    color: white;
+}
+
+.doctor-details h4 {
+    margin: 0 0 0.3rem 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.doctor-details .specialty {
+    color: #667eea;
+    font-weight: 600;
+    margin: 0.2rem 0;
+}
+
+.doctor-details .qualifications {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    font-style: italic;
+}
+
+.doctor-details .rating {
+    color: #f59e0b;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+.doctor-details .status-info {
+    color: #1b5e20;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+.doctor-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    min-width: 140px;
+}
+
+.doctor-actions .btn {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.doctor-actions .btn:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .doctor-list-card {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .doctor-actions {
+        flex-direction: row;
+        min-width: unset;
+    }
+    
+    .doctor-info {
+        gap: 1rem;
+    }
+    
+    .doctor-avatar-circle {
+        font-size: 2.5rem;
+        min-width: 70px;
+        height: 70px;
+    }
+}
+
+
+/* ============= VIDEO CALL MODAL ============= */
+.video-call-container {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 20px;
+    padding: 1.5rem;
+    max-width: 900px;
+    margin: 5% auto;
+    color: white;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 10000;
+}
+
+.video-call-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding-bottom: 1rem;
+}
+
+.video-call-header h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.video-call-content {
+    margin-bottom: 1.5rem;
+}
+
+.video-streams {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.video-box {
+    background: #0f3460;
+    border-radius: 15px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    position: relative;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    color: #667eea;
+}
+
+.video-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.video-placeholder p {
+    margin: 0;
+    font-weight: 600;
+}
+
+.doctor-video-placeholder {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.doctor-avatar-large {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.video-box .label {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.6);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.call-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+#callTimer {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+    color: #4CAF50;
+}
+
+#callStatus {
+    color: #e0e0e0;
+    margin: 0.5rem 0;
+}
+
+.chat-section {
+    background: rgba(255,255,255,0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.chat-section h4 {
+    margin: 0 0 1rem 0;
+    color: #fff;
+}
+
+.video-call-chat {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.video-call-chat .msg {
+    margin-bottom: 0.8rem;
+    padding: 0.8rem;
+    border-radius: 8px;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.video-call-chat .msg.user {
+    background: #4CAF50;
+    color: white;
+    text-align: right;
+}
+
+.video-call-chat .msg.doctor {
+    background: #2196F3;
+    color: white;
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#videoChatInput {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 1rem;
+}
+
+#videoChatInput::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+#videoChatInput:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.video-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+}
+
+.control-btn.end-call {
+    background: linear-gradient(135deg, #f5576c 0%, #ff1654 100%);
+}
+
+.control-btn.end-call:hover {
+    box-shadow: 0 8px 20px rgba(245, 87, 108, 0.5);
+}
+
+@media (max-width: 768px) {
+    .video-streams {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-call-container {
+        width: 95%;
+        padding: 1rem;
+    }
+    
+    .doctors-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+    display: {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+}
+
+.upload-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.analysis-result-box {
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    color: #333;
+}
+
+.analysis-result-box img {
+    max-width: 250px;
+    border-radius: 12px;
+    margin-top: 1rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.ai-response-section {
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(135deg, #c8e6c9 0%, #b2dfdb 50%, #a8d8ea 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.2);
+}
+
+.ai-response-section h3 {
+    color: #1b5e20;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.ai-response-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 5px solid #43a047;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.ai-response-box h4 {
+    color: #1b5e20;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.ai-response-box p {
+    margin: 0.5rem 0;
+}
+
+.ai-response-box ul {
+    margin: 1rem 0 1rem 2rem;
+    color: #333;
+}
+
+.ai-response-box li {
+    margin: 0.5rem 0;
+}
+
+/* ============= VOICE CHAT ASSISTANT ============= */
+.voice-chat-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    z-index: 999;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voice-chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+}
+
+.voice-chat-button.listening {
+    animation: pulse 0.5s infinite;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(245, 87, 108, 0.7);
+    }
+    100% {
+        box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+    }
+}
+
+.voice-modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.voice-modal-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    margin: auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+body.dark .voice-modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
+}
+
+.close-voice {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.close-voice:hover {
+    color: #000;
+}
+
+body.dark .close-voice:hover {
+    color: #fff;
+}
+
+.voice-header {
+    padding: 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.audio-icon-container {
+    margin-bottom: 15px;
+}
+
+#ear-icon {
+    font-size: 48px;
+    color: #fff;
+    animation: earListen 0.6s ease-in-out infinite;
+}
+
+@keyframes earListen {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.voice-header h2 {
+    margin: 0 0 5px 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.85;
+    font-weight: 300;
+}
+
+#status-text {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.voice-chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#voice-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.greeting-message {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.voice-message {
+    padding: 12px 16px;
+    border-radius: 12px;
+    animation: slideIn 0.3s ease;
+    word-wrap: break-word;
+    line-height: 1.5;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.voice-message.user {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    align-self: flex-end;
+    max-width: 85%;
+    border-bottom-right-radius: 0;
+}
+
+.voice-message.bot {
+    background: #f0f0f0;
+    color: #333;
+    align-self: flex-start;
+    max-width: 85%;
+    border-bottom-left-radius: 0;
+    border-left: 4px solid #667eea;
+}
+
+body.dark .voice-message.bot {
+    background: #2a2a3e;
+    color: #e0e0e0;
+}
+
+/* Audio Waves Animation */
+.audio-waves {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 15px;
+    height: 60px;
+}
+
+.wave {
+    width: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+    animation: waveAnimation 0.6s ease-in-out infinite;
+}
+
+.wave:nth-child(1) {
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.wave:nth-child(2) {
+    height: 35px;
+    animation-delay: 0.1s;
+}
+
+.wave:nth-child(3) {
+    height: 45px;
+    animation-delay: 0.2s;
+}
+
+.wave:nth-child(4) {
+    height: 35px;
+    animation-delay: 0.1s;
+}
+
+.wave:nth-child(5) {
+    height: 20px;
+    animation-delay: 0s;
+}
+
+@keyframes waveAnimation {
+    0%, 100% {
+        height: 20px;
+        opacity: 0.5;
+    }
+    50% {
+        height: 50px;
+        opacity: 1;
+    }
+}
+
+/* Voice Input Area */
+.voice-input-area {
+    display: flex;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.02);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.voice-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.voice-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+}
+
+body.dark .voice-input {
+    background: #2a2a3e;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+.send-btn {
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.voice-controls {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.02);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.voice-btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.listening-btn {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.listening-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.stop-btn {
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+}
+
+.stop-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+}
+
+.voice-btn {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+.voice-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+.voice-info {
+    padding: 12px 20px;
+    background: rgba(102, 126, 234, 0.1);
+    text-align: center;
+    border-top: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.voice-info p {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+}
+
+body.dark .voice-info p {
+    color: #aaa;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #fff 0%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+nav a, .btn-primary, .btn-secondary {
+    margin: 0 0.5rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(33, 150, 243, 0.4);
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.2rem;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    animation: fadeIn 1s;
+    padding-top: 80px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 50%, rgba(240, 147, 251, 0.8) 100%);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.card-section {
+    padding: 4rem 2rem;
+    margin: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-section:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(102, 126, 234, 0.2);
+}
+
+.card-section h2 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+.analysis-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#video, #canvas {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+}
+
+.file-input {
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    animation: slideIn 0.3s;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.modal-content h2 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#chat-messages {
+    height: 300px;
+    overflow-y: auto;
+    border: 2px solid #e0e0e0;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.message {
+    margin: 0.5rem 0;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    animation: messageFade 0.5s;
+}
+
+@keyframes messageFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message.user {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    text-align: right;
+    box-shadow: 0 3px 10px rgba(76, 175, 80, 0.2);
+}
+
+.message.bot {
+    background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+    color: #333;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+#quick-replies {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.quick-btn {
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.25);
+}
+
+.quick-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(33, 150, 243, 0.35);
+}
+
+.input-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#user-input {
+    flex: 1;
+    padding: 0.75rem 1.2rem;
+    border-radius: 25px;
+    border: 2px solid #e0e0e0;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-size: 1rem;
+}
+
+#user-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+}
+
+#send-btn {
+    padding: 0.75rem 1.2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+#send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(102, 126, 234, 0.4);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: rgba(0,0,0,0.2);
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    header { flex-direction: column; }
+    .hero { padding: 2rem; }
+}
